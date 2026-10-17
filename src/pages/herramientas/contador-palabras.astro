@@ -1,0 +1,13 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+import TextCounter from '../../components/tools/TextCounter';
+import '../../styles/v6-tools.css';
+---
+<PortalLayout title="Contador de palabras y caracteres gratis" description="Cuenta palabras, caracteres, líneas y párrafos de cualquier texto. Estima el tiempo de lectura directamente en el navegador, sin registro.">
+  <section class="p-hero"><div class="p-container"><div class="p-crumb"><a href="/">Inicio</a><span>/</span><a href="/herramientas/">Herramientas</a><span>/</span><span>Contador de palabras</span></div><p class="p-label">PRODUCTIVIDAD · SIN REGISTRO</p><h1>Contador de palabras <em>y caracteres.</em></h1><p>Analiza textos al instante: palabras, caracteres, párrafos, líneas y tiempo estimado de lectura.</p></div></section>
+  <section class="p-section"><div class="p-container">
+    <TextCounter client:load />
+    <div class="tool-explainer"><h2>¿Para qué sirve?</h2><p>Es útil para comprobar límites de palabras en tareas, artículos, publicaciones y descripciones. El tiempo de lectura es una estimación y puede variar según el tipo de texto y el lector.</p></div>
+    <p><a class="p-back" href="/herramientas/">← Volver a herramientas</a></p>
+  </div></section>
+</PortalLayout>

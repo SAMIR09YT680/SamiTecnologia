@@ -1,0 +1,108 @@
+
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+
+const ejemploConsola = "console.log('Hola desde SamiTecnologia');";
+
+const ejemploVariables = `const portal = 'SamiTecnologia';
+let visitas = 1;
+visitas = visitas + 1;
+console.log(portal, visitas);`;
+
+const ejemploFunciones = `function saludar(nombre) {
+  return 'Hola, ' + nombre;
+}
+
+console.log(saludar('Estudiante'));`;
+
+const ejemploEventos = `<button id="saludar">Saludar</button>
+<script>
+  document.getElementById('saludar')
+    .addEventListener('click', () => {
+      alert('¡Bienvenido a SamiTecnologia!');
+    });
+</script>`;
+---
+
+<PortalLayout
+  title="Primeros pasos con JavaScript"
+  description="Aprende los fundamentos de JavaScript con ejemplos prácticos."
+>
+  <section class="p-hero">
+    <div class="p-container">
+      <div class="p-crumb">
+        <a href="/">Inicio</a>
+        <span>/</span>
+        <a href="/programacion/">Programación</a>
+        <span>/</span>
+        <span>JavaScript</span>
+      </div>
+
+      <p class="p-label">GUÍA DE PROGRAMACIÓN · NIVEL INICIAL</p>
+
+      <h1>Primeros pasos con <em>JavaScript</em></h1>
+
+      <p>
+        Descubre cómo agregar lógica e interactividad a una página web.
+      </p>
+    </div>
+  </section>
+
+  <section class="p-section">
+    <article class="p-article">
+      <p>
+        <strong>JavaScript</strong> es un lenguaje de programación
+        utilizado para crear interfaces interactivas en páginas web.
+        También puede ejecutarse fuera del navegador con Node.js.
+      </p>
+
+      <h2>1. Tu primera instrucción</h2>
+      <p>
+        Abre las herramientas de desarrollo del navegador
+        (generalmente <code>F12</code>), entra en la consola y
+        prueba lo siguiente:
+      </p>
+      <pre><code>{ejemploConsola}</code></pre>
+
+      <h2>2. Variables con const y let</h2>
+      <p>
+        Una variable permite guardar un dato.
+        Usa <code>const</code> cuando no necesitas reasignarlo
+        y <code>let</code> cuando sí necesitas hacerlo.
+      </p>
+      <pre><code>{ejemploVariables}</code></pre>
+
+      <h2>3. Funciones</h2>
+      <p>
+        Una función agrupa instrucciones que puedes ejecutar
+        con distintos valores.
+      </p>
+      <pre><code>{ejemploFunciones}</code></pre>
+
+      <h2>4. Interactividad con eventos</h2>
+      <p>
+        Los eventos permiten responder a acciones,
+        como pulsar un botón.
+      </p>
+      <pre><code>{ejemploEventos}</code></pre>
+
+      <aside>
+        React ayuda a organizar interfaces más complejas,
+        pero primero conviene dominar JavaScript básico.
+      </aside>
+
+      <h2>5. Practica</h2>
+      <p>
+        Modifica el ejemplo de la función para recibir
+        dos números y devolver su suma.
+      </p>
+
+      <div class="p-related">
+        <a href="/programacion/">Más programación →</a>
+        <a href="/herramientas/formateador-json/">
+          Probar formateador JSON →
+        </a>
+      </div>
+    </article>
+  </section>
+</PortalLayout>

@@ -1,0 +1,61 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+const herramientas = [
+  { icono: 'IP', titulo: 'Calculadora IPv4/CIDR', descripcion: 'Subred, máscara, broadcast y direcciones utilizables.', href: '/herramientas/calculadora-ip/', grupo: 'Redes', estado: 'Usar ahora' },
+  { icono: '{ }', titulo: 'Formateador JSON', descripcion: 'Valida, organiza y minifica estructuras JSON.', href: '/herramientas/formateador-json/', grupo: 'Desarrollo', estado: 'Usar ahora' },
+  { icono: 'QR', titulo: 'Generador de códigos QR', descripcion: 'Crea códigos QR para textos y enlaces y descárgalos.', href: '/herramientas/generador-qr/', grupo: 'Productividad', estado: 'Usar ahora' },
+  { icono: '01', titulo: 'Conversor de bases', descripcion: 'Binario, decimal y hexadecimal.', href: '/herramientas/conversor-bases/', grupo: 'Desarrollo', estado: 'Usar ahora' },
+  { icono: '•••', titulo: 'Generador de contraseñas', descripcion: 'Claves aleatorias, seguras y personalizables.', href: '/herramientas/generador-contrasenas/', grupo: 'Seguridad', estado: 'Usar ahora' },
+  { icono: 'Aa', titulo: 'Contador de palabras', descripcion: 'Caracteres, párrafos y tiempo de lectura.', href: '/herramientas/contador-palabras/', grupo: 'Productividad', estado: 'Usar ahora' },
+] as const;
+const grupos = ['Todas', 'Redes', 'Desarrollo', 'Productividad', 'Seguridad'];
+---
+<PortalLayout title="Herramientas gratuitas" description="Seis herramientas gratuitas: calculadora IPv4, generador QR, JSON, conversor de bases, contraseñas y contador de palabras.">
+  <section class="p-hero"><div class="p-container"><div class="p-crumb"><a href="/">Inicio</a><span>/</span><span>Herramientas</span></div><p class="p-label">SOLUCIONES A UN CLIC</p><h1>Herramientas digitales <em>que sí funcionan.</em></h1><p>Filtra por categoría o busca la utilidad que necesitas. Todas son gratuitas y no requieren registro.</p></div></section>
+  <section class="p-section"><div class="p-container">
+    <div class="p-section-head"><div><h2>Encuentra tu herramienta</h2><p>Selecciona una utilidad y empieza a usarla.</p></div></div>
+    <div class="p-tool-controls" role="search" aria-label="Filtrar herramientas">
+      <label for="tool-filter-text"><span class="p-sr-only">Buscar herramienta</span></label>
+      <input id="tool-filter-text" class="p-tool-search" type="search" placeholder="Buscar: IP, JSON, QR, contraseñas..." autocomplete="off" />
+      <div class="p-tool-filters" role="group" aria-label="Categorías">
+        {grupos.map((grupo) => <button type="button" class="p-tool-filter" data-grupo={grupo} aria-pressed={grupo === 'Todas'}>{grupo}</button>)}
+      </div>
+      <p class="p-tool-count" id="tool-count" aria-live="polite">6 herramientas disponibles</p>
+    </div>
+    <div class="p-grid" id="tool-grid">
+      {herramientas.map((h) => <a class="p-card" href={h.href} data-grupo={h.grupo} data-texto={`${h.titulo} ${h.descripcion} ${h.grupo}`}><span class="p-icon" aria-hidden="true">{h.icono}</span><span class="tool-category">{h.grupo}</span><h3>{h.titulo}</h3><p>{h.descripcion}</p><span class="p-card-foot">{h.estado} →</span></a>)}
+    </div>
+    <p id="tool-empty" class="p-tool-no-results" hidden>No hay herramientas que coincidan con la búsqueda. Prueba otra palabra o categoría.</p>
+  </div></section>
+</PortalLayout>
+<script>
+  const search = document.querySelector<HTMLInputElement>('#tool-filter-text');
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('#tool-grid .p-card'));
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.p-tool-filter'));
+  const count = document.querySelector<HTMLElement>('#tool-count');
+  const empty = document.querySelector<HTMLElement>('#tool-empty');
+  let selected = 'Todas';
+  const simplify = (value: string) => value.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const update = () => {
+    const term = simplify(search?.value.trim() ?? '');
+    let visible = 0;
+    cards.forEach((card) => {
+      const groupOk = selected === 'Todas' || card.dataset.grupo === selected;
+      const textOk = simplify(card.dataset.texto || '').includes(term);
+      card.hidden = !(groupOk && textOk);
+      if (!card.hidden) visible++;
+    });
+    if (count) count.textContent = `${visible} ${visible === 1 ? 'herramienta disponible' : 'herramientas disponibles'}`;
+    if (empty) empty.hidden = visible > 0;
+  };
+  buttons.forEach((button) => button.addEventListener('click', () => {
+    selected = button.dataset.grupo ?? 'Todas';
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+    update();
+  }));
+  search?.addEventListener('input', update);
+</script>
+<style>
+  .tool-category{display:block;margin-top:14px;letter-spacing:.08em;font-size:10px;font-weight:800;color:#1688ad;text-transform:uppercase}
+  #tool-grid .p-card[hidden],#tool-empty[hidden]{display:none!important}
+</style>

@@ -1,0 +1,23 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+---
+<PortalLayout title="Qué es DNS y cómo funciona" description="Comprende qué es DNS, para qué sirven los registros A, AAAA y CNAME, y cómo diagnosticar la resolución de dominios.">
+  <section class="p-hero"><div class="p-container"><div class="p-crumb"><a href="/">Inicio</a><span>/</span><a href="/redes/">Redes</a><span>/</span><span>DNS</span></div><p class="p-label">REDES · CONCEPTOS FUNDAMENTALES</p><h1>¿Qué es <em>DNS</em> y cómo funciona?</h1><p>El sistema que permite encontrar un servidor a partir de un nombre fácil de recordar.</p></div></section>
+  <section class="p-section"><article class="p-article">
+    <p>Cuando escribes un dominio como <code>ejemplo.com</code>, tu equipo necesita conocer una dirección IP para iniciar una conexión. El <strong>DNS (Domain Name System)</strong> proporciona el mecanismo distribuido para resolver ese nombre.</p>
+    <h2>1. ¿Qué ocurre al visitar una página?</h2>
+    <ol class="p-list"><li>El navegador o el sistema comprueba si ya conoce la respuesta mediante su caché.</li><li>Si no dispone de una respuesta válida, consulta un resolvedor DNS configurado.</li><li>El resolvedor puede consultar servidores DNS hasta obtener los registros pertinentes.</li><li>Con la respuesta, el navegador puede iniciar la conexión correspondiente al servicio.</li></ol>
+    <aside>DNS ayuda a localizar servicios. No significa, por sí solo, que una conexión esté cifrada ni que el sitio sea confiable.</aside>
+    <h2>2. Registros más utilizados</h2>
+    <p><strong>A:</strong> asocia un nombre con una dirección IPv4. <strong>AAAA:</strong> utiliza una dirección IPv6. <strong>CNAME:</strong> establece un alias de otro nombre. <strong>MX:</strong> indica servidores de correo para un dominio. <strong>TXT:</strong> permite publicar información textual utilizada por distintos servicios.</p>
+    <h2>3. ¿Por qué a veces tarda en actualizarse?</h2>
+    <p>Las respuestas DNS pueden almacenarse temporalmente. Cada registro incluye un valor TTL que orienta el tiempo de caché. Por eso, después de un cambio, distintos usuarios podrían obtener respuestas diferentes durante un período.</p>
+    <h2>4. Cómo comprobar DNS en Windows</h2>
+    <p>Abre PowerShell y consulta un dominio público con:</p>
+    <pre><code>nslookup example.com</code></pre>
+    <p>También puedes usar:</p>
+    <pre><code>Resolve-DnsName example.com</code></pre>
+    <p>Si resuelve el dominio pero la página no carga, la causa podría estar en el servidor, la conexión, un firewall o HTTPS; DNS no explica todos los fallos.</p>
+    <div class="p-related"><a href="/redes/direcciones-ip/">Aprender direcciones IP →</a><a href="/herramientas/calculadora-ip/">Abrir calculadora IPv4 →</a></div>
+  </article></section>
+</PortalLayout>

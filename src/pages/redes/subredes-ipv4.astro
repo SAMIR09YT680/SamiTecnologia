@@ -1,0 +1,30 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+const ejemplo = `IP:            192.168.10.70/26
+Máscara:       255.255.255.192
+Red:           192.168.10.64
+Primer host:   192.168.10.65
+Último host:   192.168.10.126
+Broadcast:     192.168.10.127
+Hosts útiles:  62`;
+---
+<PortalLayout title="Subredes IPv4 explicadas con un ejemplo /26" description="Resuelve paso a paso una subred /26 y aprende a identificar red, broadcast y rango de hosts.">
+<section class="p-hero"><div class="p-container"><div class="p-crumb"><a href="/">Inicio</a><span>/</span><a href="/redes/">Redes</a><span>/</span><span>subredes ipv4</span></div><p class="p-label">REDES · EJERCICIO PRÁCTICO</p><h1>Subredes IPv4 explicadas con un ejemplo /26</h1><p>Resuelve paso a paso una subred /26 y aprende a identificar red, broadcast y rango de hosts.</p></div></section>
+<section class="p-section"><article class="p-article">
+<p>Dividir una red IPv4 en subredes permite organizar dispositivos y reservar rangos. Practiquemos con 192.168.10.70/26 para aprender qué significa el prefijo.</p>
+<h2>1. Interpreta el prefijo</h2>
+<p>IPv4 utiliza 32 bits. El prefijo /26 indica que 26 bits identifican la red y quedan 6 bits para las direcciones dentro de la subred. La máscara correspondiente es 255.255.255.192.</p>
+<h2>2. Encuentra el tamaño del bloque</h2>
+<p>Con 6 bits de host existen 2 elevado a 6, es decir, 64 direcciones por subred. En el último octeto, los bloques comienzan en 0, 64, 128 y 192.</p>
+<p>Como la IP del ejercicio termina en 70, pertenece al bloque que empieza en 64.</p>
+<h2>3. Calcula red, broadcast y hosts</h2>
+<p>Dirección de red: 192.168.10.64. Broadcast: 192.168.10.127. Rango de hosts normalmente utilizable: desde 192.168.10.65 hasta 192.168.10.126.</p>
+<p>En una red tradicional con dirección de red y broadcast reservados, hay 62 direcciones utilizables. Existen excepciones para prefijos especiales como /31 y /32.</p>
+<pre><code>{ejemplo}</code></pre>
+<h2>4. Comprueba con nuestra calculadora</h2>
+<p>Introduce 192.168.10.70/26 en la calculadora gratuita de SamiTecnologia y verifica el resultado. Luego cambia el prefijo a /27 y observa cómo disminuye el bloque.</p>
+<h2>5. Pregunta de repaso</h2>
+<p>¿A qué subred pertenece 192.168.10.150/26? Los bloques tienen tamaño 64. La dirección 150 queda entre 128 y 191, así que su red es 192.168.10.128 y su broadcast es 192.168.10.191.</p>
+<aside>Consejo: practica con tus propios ejemplos y verifica los resultados antes de aplicar cambios en un sistema real.</aside>
+<div class="p-related"><a href="/herramientas/calculadora-ip/">Calcular tu subred →</a><a href="/redes/direcciones-ip/">Qué es una dirección IP →</a></div></article></section>
+</PortalLayout>

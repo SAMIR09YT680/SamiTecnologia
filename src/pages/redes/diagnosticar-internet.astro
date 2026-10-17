@@ -1,0 +1,25 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+const ejemplo = `ipconfig /all
+ping 192.168.1.1
+ping 1.1.1.1
+nslookup example.com`;
+---
+<PortalLayout title="Cómo diagnosticar una conexión a Internet en Windows" description="Sigue una secuencia de pruebas con ipconfig, ping y nslookup para localizar fallos básicos.">
+<section class="p-hero"><div class="p-container"><div class="p-crumb"><a href="/">Inicio</a><span>/</span><a href="/redes/">Redes</a><span>/</span><span>diagnosticar internet</span></div><p class="p-label">REDES · SOLUCIÓN DE PROBLEMAS</p><h1>Cómo diagnosticar una conexión a Internet en Windows</h1><p>Sigue una secuencia de pruebas con ipconfig, ping y nslookup para localizar fallos básicos.</p></div></section>
+<section class="p-section"><article class="p-article">
+<p>Que una página no cargue no significa necesariamente que no haya conexión a Internet. El problema puede estar en el Wi-Fi, el router, el DNS o un servicio remoto. Diagnosticarlo por capas ahorra tiempo.</p>
+<h2>1. Comprueba lo físico y lo inalámbrico</h2>
+<p>Verifica si el equipo está conectado a la red correcta y si el router tiene servicio. En caso de Wi-Fi, acércate al punto de acceso y revisa la señal. Si puedes, compara con otro dispositivo de la misma red.</p>
+<h2>2. Inspecciona la configuración IP</h2>
+<p>En PowerShell o Símbolo del sistema de Windows ejecuta ipconfig /all. Identifica la dirección IPv4, la máscara, la puerta de enlace predeterminada y los DNS. Una dirección 169.254.x.x suele indicar que no se recibió configuración IPv4 habitual mediante DHCP.</p>
+<h2>3. Prueba por etapas</h2>
+<p>Haz ping a la puerta de enlace que hayas encontrado. Después puedes probar ping 1.1.1.1 para comprobar alcance IP a una dirección externa; algunos equipos bloquean ICMP, por lo que un fallo aislado no es prueba definitiva.</p>
+<pre><code>{ejemplo}</code></pre>
+<h2>4. Comprueba la resolución DNS</h2>
+<p>Ejecuta nslookup example.com. Si resuelve un nombre pero el navegador falla, revisa el navegador, proxy o filtros. Si no resuelve, examina la configuración de DNS y pregunta si otros dispositivos presentan el mismo problema.</p>
+<h2>5. Antes de cambiar ajustes</h2>
+<p>Anota el resultado de cada prueba. No modifiques las direcciones IP del router ni reinicies equipos compartidos sin autorización. Si es una red de empresa o institución, consulta al administrador.</p>
+<aside>Consejo: practica con tus propios ejemplos y verifica los resultados antes de aplicar cambios en un sistema real.</aside>
+<div class="p-related"><a href="/redes/que-es-dns/">Entender DNS →</a><a href="/herramientas/calculadora-ip/">Calculadora IP →</a></div></article></section>
+</PortalLayout>

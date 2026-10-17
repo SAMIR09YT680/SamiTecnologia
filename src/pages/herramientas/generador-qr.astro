@@ -1,0 +1,29 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+import QrGenerator from '../../components/tools/QrGenerator';
+import '../../styles/qr-tool.css';
+---
+<PortalLayout
+  title="Generador de códigos QR gratis"
+  description="Genera códigos QR estáticos para texto y enlaces gratis. Personaliza colores, resolución y descarga en PNG o SVG, directamente en tu navegador."
+>
+  <section class="p-hero">
+    <div class="p-container">
+      <div class="p-crumb"><a href="/">Inicio</a><span>/</span><a href="/herramientas/">Herramientas</a><span>/</span><span>Generador QR</span></div>
+      <p class="p-label">HERRAMIENTA GRATUITA · SIN REGISTRO</p>
+      <h1>Generador de <em>códigos QR.</em></h1>
+      <p>Convierte enlaces y textos en códigos QR personalizados. Descárgalos en PNG o SVG, sin enviar su contenido a nuestros servidores.</p>
+    </div>
+  </section>
+  <section class="p-section">
+    <div class="p-container">
+      <QrGenerator client:load />
+      <div class="qr-article">
+        <div><span class="qr-step">INFORMACIÓN ÚTIL</span><h2>¿Cómo funciona un código QR?</h2><p>Un código QR contiene información codificada en una cuadrícula que puede leer la cámara de un dispositivo. Puedes compartir direcciones web, frases y otros datos de texto sin escribirlos manualmente.</p></div>
+        <div><span class="qr-step">BUENAS PRÁCTICAS</span><h2>Consejos para que se lea bien</h2><p>Usa un color oscuro sobre uno claro, mantén el margen blanco alrededor del código y pruébalo desde distintos teléfonos. El nivel de corrección de errores ayuda ante pequeñas imperfecciones, pero no garantiza su lectura en cualquier situación.</p></div>
+        <div><span class="qr-step">IMPORTANTE</span><h2>QR estático y privacidad</h2><p>El QR es estático: guarda el texto o enlace que introduces y no permite cambiar el destino después de descargarlo. La generación ocurre localmente en tu navegador. No incluyas contraseñas ni información sensible en códigos que vas a publicar.</p></div>
+      </div>
+      <p class="qr-back"><a class="p-back" href="/herramientas/">← Volver a todas las herramientas</a></p>
+    </div>
+  </section>
+</PortalLayout>

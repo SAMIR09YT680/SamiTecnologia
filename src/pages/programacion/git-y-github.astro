@@ -1,0 +1,30 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+const comandos = `git --version
+git init
+git status
+git add .
+git commit -m "Primer avance"`;
+const remoto = `git remote add origin https://github.com/USUARIO/REPOSITORIO.git
+git branch -M main
+git push -u origin main`;
+---
+<PortalLayout title="Git y GitHub desde cero" description="Aprende las diferencias entre Git y GitHub y conoce los comandos básicos para registrar y publicar versiones de un proyecto.">
+  <section class="p-hero"><div class="p-container"><div class="p-crumb"><a href="/">Inicio</a><span>/</span><a href="/programacion/">Programación</a><span>/</span><span>Git y GitHub</span></div><p class="p-label">PROGRAMACIÓN · GUÍA PRÁCTICA</p><h1>Git y GitHub <em>desde cero.</em></h1><p>Aprende a guardar versiones de tu código sin perder el control de los cambios.</p></div></section>
+  <section class="p-section"><article class="p-article">
+    <p><strong>Git</strong> es un sistema de control de versiones distribuido. Permite guardar el historial de cambios de tus archivos. <strong>GitHub</strong> es un servicio de alojamiento de repositorios Git con funciones de colaboración.</p>
+    <h2>1. Antes de empezar</h2>
+    <p>Instala Git y comprueba que esté disponible. Trabaja dentro de la carpeta de un proyecto creado por ti. Nunca incluyas claves privadas ni archivos <code>.env</code> con credenciales en el repositorio.</p>
+    <h2>2. Tu primer repositorio local</h2>
+    <p>En la terminal de Visual Studio Code, ejecuta estos comandos dentro de la carpeta del proyecto:</p>
+    <pre><code>{comandos}</code></pre>
+    <p><code>git init</code> inicia el historial local. <code>git status</code> muestra cambios pendientes. <code>git add .</code> prepara archivos, y <code>git commit</code> registra una versión. Antes de agregar todo, verifica con <code>git status</code> que no haya datos confidenciales.</p>
+    <h2>3. Publicar en GitHub</h2>
+    <p>Crea un repositorio vacío en GitHub y sustituye <code>USUARIO</code> y <code>REPOSITORIO</code> por los valores reales. Si ya tienes una rama o un remoto configurados, adapta los comandos a tu situación.</p>
+    <pre><code>{remoto}</code></pre>
+    <aside>Git puede solicitarte configurar nombre y correo para tus commits; la autenticación a GitHub suele requerir un navegador o credenciales seguras, no la contraseña de tu cuenta pegada en la terminal.</aside>
+    <h2>4. Flujo para cada avance</h2>
+    <p>Realiza cambios pequeños, comprueba que funcionen, revisa <code>git diff</code>, registra un commit descriptivo y luego envía los cambios con <code>git push</code>. Así será más fácil detectar cuándo se introdujo un problema.</p>
+    <div class="p-related"><a href="/programacion/primeros-pasos-javascript/">Aprender JavaScript →</a><a href="/programacion/">Ver más programación →</a></div>
+  </article></section>
+</PortalLayout>

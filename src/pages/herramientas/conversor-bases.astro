@@ -1,0 +1,8 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+import BaseConverter from '../../components/tools/BaseConverter';
+---
+<PortalLayout title="Conversor binario, decimal y hexadecimal" description="Convierte números de binario a decimal y hexadecimal, y viceversa, con el conversor gratuito de SamiTecnologia.">
+  <section class="p-hero"><div class="p-container"><div class="p-crumb"><a href="/">Inicio</a><span>/</span><a href="/herramientas/">Herramientas</a><span>/</span><span>Conversor</span></div><p class="p-label">HERRAMIENTA DIGITAL</p><h1>Conversor de <em>bases numéricas</em></h1><p>Convierte números enteros entre los sistemas binario, decimal y hexadecimal.</p></div></section>
+  <section class="p-section"><div class="p-container"><BaseConverter client:load /><div class="tool-explainer"><h2>¿Por qué usar distintas bases?</h2><p>El binario utiliza los dígitos 0 y 1; el decimal usa los dígitos 0 a 9; y el hexadecimal usa 0 a 9 y A a F. El mismo valor puede representarse como <strong>11111111</strong> en binario, <strong>255</strong> en decimal y <strong>FF</strong> en hexadecimal.</p></div><p style="margin-top:30px"><a class="p-back" href="/herramientas/">← Volver a las herramientas</a></p></div></section>
+</PortalLayout>

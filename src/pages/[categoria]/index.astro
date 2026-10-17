@@ -1,0 +1,31 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+import { secciones } from '../../data/categories';
+export function getStaticPaths() {
+  return secciones.map((seccion) => ({ params: { categoria: seccion.slug }, props: { seccion } }));
+}
+const { seccion } = Astro.props;
+---
+<PortalLayout title={seccion.titulo} description={seccion.descripcion}>
+  <section class="p-hero">
+    <div class="p-container">
+      <div class="p-crumb"><a href="/">Inicio</a><span>/</span><span>{seccion.titulo}</span></div>
+      <p class="p-label">EXPLORA · APRENDE · INNOVA</p>
+      <h1>{seccion.titulo} <em>{seccion.acento}</em></h1>
+      <p>{seccion.descripcion}</p>
+    </div>
+  </section>
+  <section class="p-section">
+    <div class="p-container">
+      <div class="p-section-head"><div><h2>Recursos y contenidos</h2><p>Empieza con las guías disponibles y descubre lo que viene.</p></div></div>
+      <div class="p-grid">
+        {seccion.recursos.map((recurso) => recurso.url ? (
+          <a href={recurso.url} class="p-card"><span class="p-icon" aria-hidden="true">{seccion.icono}</span><h3>{recurso.titulo}</h3><p>{recurso.descripcion}</p><span class="p-card-foot">{recurso.etiqueta} →</span></a>
+        ) : (
+          <article class="p-card p-soon"><span class="p-icon" aria-hidden="true">{seccion.icono}</span><h3>{recurso.titulo}</h3><p>{recurso.descripcion}</p><span class="p-card-foot">{recurso.etiqueta}</span></article>
+        ))}
+      </div>
+      <div class="p-ribbon">SamiTecnologia está creciendo. Publicaremos contenido propio y comprobado progresivamente, priorizando la calidad y la utilidad para quienes aprenden.</div>
+    </div>
+  </section>
+</PortalLayout>

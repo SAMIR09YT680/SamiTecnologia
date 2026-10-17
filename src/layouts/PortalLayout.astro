@@ -1,0 +1,93 @@
+---
+import '../styles/inner.css';
+import SeoHead from '../components/SeoHead.astro';
+import PortalSearch from '../components/PortalSearch.astro';
+import '../styles/v8.css';
+interface Props {
+  title: string;
+  description: string;
+  eyebrow?: string;
+}
+const { title, description } = Astro.props;
+const path = Astro.url.pathname;
+const enlaces = [
+  { nombre: 'Inicio', href: '/' },
+  { nombre: 'Tecnología', href: '/tecnologia/' },
+  { nombre: 'Programación', href: '/programacion/' },
+  { nombre: 'Redes', href: '/redes/' },
+  { nombre: 'Tutoriales', href: '/tutoriales/' },
+  { nombre: 'Herramientas', href: '/herramientas/' },
+];
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#09172B" />
+    <SeoHead title={`${title} | SamiTecnologia`} description={description} />
+    <link rel="icon" href="/images/favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="p-skip" href="#contenido">Saltar al contenido</a>
+    <header class="p-header">
+      <div class="p-container p-header-inner">
+        <a class="p-brand" href="/" aria-label="SamiTecnologia, página principal">
+          <img src="/images/logo-horizontal.webp" alt="SamiTecnologia" width="946" height="353" />
+        </a>
+        <nav class="p-desktop-nav" aria-label="Menú principal">
+          {enlaces.map((link) => <a class:list={{ active: link.href === '/' ? path === '/' : path.startsWith(link.href) }} href={link.href}>{link.nombre}</a>)}
+        </nav>
+        <div class="p-header-actions">
+          <button type="button" class="p-search-button" data-portal-search-open aria-label="Buscar contenido" title="Buscar (Ctrl + K)">
+            <span aria-hidden="true">⌕</span><span class="p-search-text">Buscar</span>
+          </button>
+          <button class="p-menu-button" type="button" id="p-menu-button" aria-label="Abrir menú" aria-controls="p-mobile-nav" aria-expanded="false">
+          <span aria-hidden="true">☰</span>
+          </button>
+        </div>
+      </div>
+      <nav class="p-mobile-nav" id="p-mobile-nav" aria-label="Menú móvil" hidden>
+        {enlaces.map((link) => <a href={link.href}>{link.nombre}</a>)}
+      </nav>
+    </header>
+    <main id="contenido">
+      <slot />
+    </main>
+    <footer class="p-footer">
+      <div class="p-container p-footer-top">
+        <a href="/"><img src="/images/logo-horizontal.webp" alt="SamiTecnologia" width="946" height="353" loading="lazy" /></a>
+        <nav aria-label="Secciones del portal">
+          <a href="/programacion/">Programación</a><a href="/redes/">Redes</a><a href="/herramientas/">Herramientas</a><a href="/nosotros/">Nosotros</a><a href="/contacto/">Contacto</a>
+        </nav>
+      </div>
+      <div class="p-container p-footer-bottom"><span>© {new Date().getFullYear()} SamiTecnologia</span><span><a href="/privacidad/">Privacidad</a> · <a href="/cookies/">Cookies</a> · <a href="/terminos/">Términos</a></span></div>
+    </footer>
+    <PortalSearch />
+    <script>
+      const button = document.querySelector<HTMLButtonElement>('#p-menu-button');
+      const menu = document.querySelector<HTMLElement>('#p-mobile-nav');
+      button?.addEventListener('click', () => {
+        if (!menu) return;
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!expanded));
+        button.setAttribute('aria-label', expanded ? 'Abrir menú' : 'Cerrar menú');
+        menu.hidden = expanded;
+      });
+      menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { if (menu && button) { menu.hidden = true; button.setAttribute('aria-expanded', 'false'); } }));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && menu && button) {
+          menu.hidden = true;
+          button.setAttribute('aria-expanded', 'false');
+          button.setAttribute('aria-label', 'Abrir menú');
+        }
+      });
+      document.querySelectorAll('[data-portal-search-open]').forEach((btn) => btn.addEventListener('click', () => {
+        if (menu && button) { menu.hidden = true; button.setAttribute('aria-expanded', 'false'); }
+      }));
+    </script>
+  </body>
+</html>

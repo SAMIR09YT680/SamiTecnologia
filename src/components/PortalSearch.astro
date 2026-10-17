@@ -1,0 +1,65 @@
+<dialog id="portal-search" class="ps-dialog" aria-label="Buscar en SamiTecnologia">
+  <section class="ps-panel" role="document">
+    <div class="ps-head">
+      <div><span class="ps-overline">EXPLORA SAMITECNOLOGIA</span><h2>¿Qué quieres encontrar?</h2></div>
+      <button type="button" class="ps-close" data-portal-search-close aria-label="Cerrar búsqueda">✕</button>
+    </div>
+    <label for="portal-search-input" class="ps-input-shell">
+      <span aria-hidden="true">⌕</span>
+      <input type="search" id="portal-search-input" autocomplete="off" placeholder="Busca herramientas, redes, programación…" />
+    </label>
+    <p class="ps-tip">Busca por tema o herramienta. Atajo: Ctrl + K.</p>
+    <div id="portal-search-results" class="ps-results" aria-live="polite"></div>
+  </section>
+</dialog>
+<script>
+  import { indiceBusqueda } from '../data/search';
+  const dialog = document.querySelector<HTMLDialogElement>('#portal-search');
+  const input = document.querySelector<HTMLInputElement>('#portal-search-input');
+  const results = document.querySelector<HTMLElement>('#portal-search-results');
+  const normalize = (str: string) => str.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const render = (term: string) => {
+    if (!results) return;
+    results.replaceChildren();
+    const query = normalize(term.trim());
+    const matches = indiceBusqueda.filter((item) => normalize(`${item.name} ${item.description} ${item.tag}`).includes(query));
+    if (!matches.length) {
+      const p = document.createElement('p'); p.className = 'ps-empty';
+      p.textContent = 'No hay resultados. Prueba con otro término.';
+      results.append(p); return;
+    }
+    for (const item of matches.slice(0, 14)) {
+      const a = document.createElement('a'); a.href = item.href; a.className = 'ps-result';
+      const info = document.createElement('span');
+      const name = document.createElement('strong'); name.textContent = item.name;
+      const desc = document.createElement('small'); desc.textContent = item.description;
+      const tag = document.createElement('span'); tag.className = 'ps-tag'; tag.textContent = item.tag;
+      info.append(name, desc); a.append(info, tag);
+      a.addEventListener('click', () => dialog?.close()); results.append(a);
+    }
+  };
+  const open = () => { if (!dialog || dialog.open) return; if (input) input.value = ''; render(''); dialog.showModal(); input?.focus(); };
+  document.querySelectorAll('[data-portal-search-open]').forEach((b) => b.addEventListener('click', open));
+  document.querySelector('[data-portal-search-close]')?.addEventListener('click', () => dialog?.close());
+  input?.addEventListener('input', () => render(input.value));
+  dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  document.addEventListener('keydown', (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+      event.preventDefault(); dialog?.open ? dialog.close() : open();
+    }
+  });
+</script>
+<style>
+  .ps-dialog { border:0;padding:0;background:transparent;color:#203951;max-width:min(680px,calc(100% - 26px));width:100%;max-height:min(85vh,750px);overflow:visible; }
+  .ps-dialog::backdrop { background:rgba(3,15,30,.76);backdrop-filter:blur(8px); }
+  .ps-panel { background:#fff;border:1px solid #b9dbe8;border-radius:22px;box-shadow:0 30px 110px #0006;padding:clamp(18px,4vw,32px);max-height:80vh;overflow-y:auto; }
+  .ps-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.ps-head h2{margin:8px 0 20px;font-size:clamp(22px,4vw,30px);color:#102d49}
+  .ps-overline{font-size:10px;color:#1285ad;font-weight:800;letter-spacing:.14em}
+  .ps-close{border:1px solid #dbe9f2;background:#f4f8fb;border-radius:10px;width:40px;height:40px;color:#254860}
+  .ps-input-shell{display:flex;align-items:center;gap:10px;border:2px solid #badfea;border-radius:13px;padding:0 15px;color:#147fa4}
+  .ps-input-shell:focus-within{border-color:#1789c0}.ps-input-shell span{font-size:29px}.ps-input-shell input{height:54px;width:100%;border:0;outline:0;background:transparent;color:#18344e;font-size:15px;min-width:0}
+  .ps-tip{font-size:12px;color:#6a8297;margin:12px 0 18px}
+  .ps-results{display:grid;gap:7px}.ps-result{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px;border:1px solid #e3edf4;border-radius:11px;text-decoration:none;color:#18344e}
+  .ps-result:hover,.ps-result:focus-visible{border-color:#57bedb;background:#effaff}.ps-result strong{display:block;font-size:13px}.ps-result small{display:block;color:#637b90;font-size:12px;margin-top:4px;line-height:1.4}.ps-tag{font-size:10px;font-weight:800;color:#128bb5;background:#e7f7fb;border-radius:6px;padding:5px 7px;white-space:nowrap}.ps-empty{color:#687f91;padding:20px 0}
+  @media(max-width:480px){.ps-tag{display:none}}
+</style>

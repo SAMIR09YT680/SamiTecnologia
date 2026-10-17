@@ -1,0 +1,19 @@
+/* SamiTecnologia · Estudio QR / estilo híbrido premium */
+.qr-studio{display:grid;grid-template-columns:minmax(0,1.07fr) minmax(320px,.93fr);gap:22px;align-items:stretch}
+.qr-editor,.qr-preview-panel{background:#fff;border:1px solid #dce9f2;border-radius:22px;padding:clamp(22px,3vw,38px);box-shadow:0 16px 36px rgba(20,62,92,.055);min-width:0}
+.qr-preview-panel{background:linear-gradient(180deg,#fff 0%,#f3fafe 100%)}
+.qr-panel-heading{margin-bottom:27px}.qr-panel-heading h2{font-size:clamp(25px,2.9vw,33px);margin:10px 0 10px;color:#17334e}.qr-panel-heading p{font-size:13px;line-height:1.8;color:#61788c;margin:0;max-width:490px}
+.qr-step{font-size:10px;letter-spacing:.16em;font-weight:800;color:#1186ae}
+.qr-textarea{min-height:140px!important;resize:vertical;font-family:'Inter',system-ui,sans-serif!important;font-size:14px!important}
+.qr-counter{text-align:right;font-size:11px;color:#71889b}
+.qr-controls-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:18px}
+.qr-color-field{display:flex;flex-direction:column;gap:9px}.qr-color-field label{font-weight:800;font-size:13px;color:#29465d}.qr-color-picker{border:1px solid #bed4e1;border-radius:11px;display:flex;align-items:center;gap:13px;padding:9px 12px;background:#fbfdff}.qr-color-picker input{width:49px;height:40px;cursor:pointer;padding:0;border:0;background:none}.qr-color-picker code{font-size:12px;color:#465e72}
+.qr-editor-footer{border-top:1px solid #e5eef4;margin-top:25px;padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.qr-editor-footer span{font-size:11px;color:#748da1}
+.qr-preview-board{min-height:337px;border-radius:17px;border:1px solid #d7e8f1;background:repeating-linear-gradient(45deg,#f4f8fb 0,#f4f8fb 13px,#edf4f8 13px,#edf4f8 26px);display:flex;align-items:center;justify-content:center;padding:23px}.qr-output-image{display:block;width:min(100%,286px);height:auto;max-height:286px;object-fit:contain;box-shadow:0 18px 45px rgba(19,63,93,.12)}
+.qr-placeholder{font-size:13px;color:#6a8195;text-align:center;padding:24px}
+.qr-download-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:19px}.qr-download-actions .tool-btn{flex:1;min-width:145px}.qr-download-actions button:disabled{opacity:.5;cursor:not-allowed;filter:none}
+.qr-preview-note{font-size:12px;color:#58788f;line-height:1.7;margin:17px 0 0}.qr-preview-panel .tool-error{margin-top:15px}
+.qr-article{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin:64px 0 0}.qr-article>div{border-top:2px solid #d9e8f1;padding-top:24px}.qr-article h2{font-size:20px;color:#17334e;margin:9px 0}.qr-article p{font-size:13px;line-height:1.85;color:#5e768b}.qr-back{margin-top:34px}
+@media(max-width:850px){.qr-studio{grid-template-columns:1fr}.qr-preview-board{min-height:300px}.qr-article{grid-template-columns:1fr;gap:15px;margin-top:45px}}
+@media(max-width:520px){.qr-controls-row{grid-template-columns:1fr}.qr-editor,.qr-preview-panel{padding:20px}.qr-preview-board{min-height:270px}.qr-download-actions{flex-direction:column}.qr-download-actions .tool-btn{width:100%}}
+@media(prefers-reduced-motion:reduce){.qr-studio *{transition:none!important}}

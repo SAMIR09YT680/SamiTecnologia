@@ -1,0 +1,611 @@
+---
+import SeoHead from '../components/SeoHead.astro';
+// SamiTecnologia — Inicio v2 · Astro + TypeScript
+// La página principal se mantiene estática para cargar rápido.
+// React se utiliza para las herramientas interactivas.
+
+const categorias = [
+  {
+    numero: '01',
+    icono: '</>',
+    nombre: 'Programación',
+    descripcion: 'Del primer código a tus propias aplicaciones. Aprende desarrollo web con ejemplos reales.',
+    etiqueta: 'Desarrollo y software',
+    destino: '/programacion/',
+    clase: 'programacion',
+  },
+  {
+    numero: '02',
+    icono: '⌘',
+    nombre: 'Redes y sistemas',
+    descripcion: 'Comprende cómo se conectan los dispositivos y aprende a configurar tus propias redes.',
+    etiqueta: 'Infraestructura y conexión',
+    destino: '/redes/',
+    clase: 'redes',
+  },
+  {
+    numero: '03',
+    icono: '{ }',
+    nombre: 'Herramientas',
+    descripcion: 'Utilidades sencillas, rápidas y gratuitas para resolver necesidades digitales.',
+    etiqueta: 'Productividad y utilidades',
+    destino: '/herramientas/',
+    clase: 'herramientas',
+  },
+  {
+    numero: '04',
+    icono: '↗',
+    nombre: 'Tutoriales',
+    descripcion: 'Explicaciones claras y guías paso a paso para llevar tus ideas a la práctica.',
+    etiqueta: 'Aprendizaje práctico',
+    destino: '/tutoriales/',
+    clase: 'tutoriales',
+  },
+];
+
+const proximosArticulos = [
+  {
+    categoria: 'REDES',
+    titulo: 'Qué es una dirección IP y cómo funciona',
+    descripcion: 'Aprende IPv4, máscaras, redes privadas y nociones de conectividad.',
+    icono: '01',
+    tono: 'blue',
+    enlace: '/redes/direcciones-ip/',
+    estado: 'Leer guía',
+  },
+  {
+    categoria: 'PROGRAMACIÓN',
+    titulo: 'Primeros pasos con JavaScript',
+    descripcion: 'Variables, funciones y eventos para empezar a programar.',
+    icono: '</>',
+    tono: 'violet',
+    enlace: '/programacion/primeros-pasos-javascript/',
+    estado: 'Leer guía',
+  },
+  {
+    categoria: 'TUTORIALES',
+    titulo: 'Diseño responsive con Flexbox y Grid',
+    descripcion: 'Crea páginas que se adapten a móviles y computadores.',
+    icono: '↗',
+    tono: 'mint',
+    enlace: '/programacion/diseno-responsive/',
+    estado: 'Leer guía',
+  },
+];
+
+const proximasHerramientas = [
+  { icono: 'IP', nombre: 'Calculadora IPv4/CIDR', descripcion: 'Subred, máscara, hosts y broadcast.', clase: 'blue', disponible: true, destino: '/herramientas/calculadora-ip/' },
+  { icono: 'QR', nombre: 'Generador de códigos QR', descripcion: 'Crea y descarga QR en PNG o SVG.', clase: 'cyan', disponible: true, destino: '/herramientas/generador-qr/' },
+  { icono: '01', nombre: 'Conversor de bases', descripcion: 'Binario, decimal y hexadecimal.', clase: 'violet', disponible: true, destino: '/herramientas/conversor-bases/' },
+  { icono: '{ }', nombre: 'Formateador JSON', descripcion: 'Da formato y valida estructuras JSON.', clase: 'mint', disponible: true, destino: '/herramientas/formateador-json/' },
+  { icono: '•••', nombre: 'Generador de contraseñas', descripcion: 'Claves aleatorias seguras y configurables.', clase: 'blue', disponible: true, destino: '/herramientas/generador-contrasenas/' },
+  { icono: 'Aa', nombre: 'Contador de palabras', descripcion: 'Analiza palabras, caracteres y tiempo de lectura.', clase: 'cyan', disponible: true, destino: '/herramientas/contador-palabras/' },
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#09172B" />
+    <SeoHead
+      title="SamiTecnologia | Explora · Aprende · Innova"
+      description="Aprende programación, redes y tecnología con tutoriales claros y seis herramientas digitales gratuitas en SamiTecnologia."
+    />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="site-header" id="inicio">
+      <div class="nav-shell container">
+        <a class="brand" href="#inicio" aria-label="SamiTecnologia, ir al inicio">
+          <img src="/images/logo-horizontal.webp" alt="SamiTecnologia" width="946" height="353" fetchpriority="high" />
+        </a>
+
+        <nav class="desktop-nav" aria-label="Navegación principal">
+          <a class="nav-active" href="#inicio">Inicio</a>
+          <a href="#categorias">Explorar</a>
+          <a href="#contenidos">Contenidos</a>
+          <a href="/herramientas/">Herramientas</a>
+          <a href="#acerca">Nosotros</a>
+        </nav>
+
+        <div class="header-actions">
+          <button type="button" class="search-button" data-open-search aria-label="Buscar contenido" title="Buscar contenido">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.7"/><path d="m16 16 4.5 4.5"/></svg>
+            <span>Buscar</span>
+            <kbd>Ctrl K</kbd>
+          </button>
+          <button type="button" class="menu-button" data-menu-toggle aria-controls="mobile-navigation" aria-expanded="false" aria-label="Abrir menú">
+            <svg class="menu-icon" viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <nav id="mobile-navigation" class="mobile-nav" aria-label="Navegación móvil" hidden>
+        <a href="#inicio">Inicio</a>
+        <a href="#categorias">Explorar</a>
+        <a href="#contenidos">Contenidos</a>
+        <a href="/herramientas/">Herramientas</a>
+        <a href="#acerca">Nosotros</a>
+      </nav>
+    </header>
+
+    <main id="contenido">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+        <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+        <div class="container hero-layout">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> EXPLORA · APRENDE · INNOVA</div>
+            <h1 id="hero-title">La tecnología al alcance <span>de tus ideas<span class="period">.</span></span></h1>
+            <p class="hero-description">El espacio donde el conocimiento se convierte en posibilidades. Aprende programación, comprende las redes y descubre recursos para crear algo extraordinario.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="/herramientas/">Explorar herramientas <span aria-hidden="true">↗</span></a>
+              <a class="button button-ghost" href="#categorias">Descubrir contenido <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="hero-highlights" aria-label="Lo que encontrarás">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg> Tutoriales prácticos</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg> Herramientas gratuitas</span>
+            </div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="hero-art-halo"></div>
+            <div class="hero-art-ring ring-one"></div>
+            <div class="hero-art-ring ring-two"></div>
+            <img class="hero-emblem" src="/images/logo-simbolo.webp" alt="" width="572" height="612" />
+            <span class="spark spark-a"></span><span class="spark spark-b"></span><span class="spark spark-c"></span>
+          </div>
+        </div>
+        <div class="hero-bottom-line" aria-hidden="true"></div>
+      </section>
+
+      <section class="intro-strip" aria-label="Áreas de SamiTecnologia">
+        <div class="container intro-strip-content">
+          <span class="strip-label">UN LUGAR PARA</span>
+          <span>Aprender <b>•</b> Crear <b>•</b> Resolver <b>•</b> Innovar</span>
+          <a href="#categorias">Conoce las áreas <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="section categories-section" id="categorias" aria-labelledby="categorias-title">
+        <div class="container">
+          <div class="section-top">
+            <div class="section-heading">
+              <span class="overline"><span class="overline-mark"></span> TU PUNTO DE PARTIDA</span>
+              <h2 id="categorias-title">Explora un mundo de <span>posibilidades.</span></h2>
+              <p>Elige el tema que te interesa. Cada sección está pensada para aprender de forma clara y llevar tus conocimientos a la práctica.</p>
+            </div>
+            <span class="section-index" aria-hidden="true">01 / EXPLORAR</span>
+          </div>
+          <div class="category-grid">
+            {categorias.map((categoria) => (
+              <a class={`category-card category-${categoria.clase}`} href={categoria.destino} aria-label={`Explorar ${categoria.nombre}`}>
+                <div class="category-top"><span class="category-icon" aria-hidden="true">{categoria.icono}</span><span class="category-number">{categoria.numero}</span></div>
+                <div class="category-body"><span class="category-kicker">{categoria.etiqueta}</span><h3>{categoria.nombre}</h3><p>{categoria.descripcion}</p></div>
+                <span class="category-arrow" aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="section editorial-section" id="contenidos" aria-labelledby="contenidos-title">
+        <div class="container">
+          <div class="section-top">
+            <div class="section-heading">
+              <span class="overline"><span class="overline-mark"></span> APRENDE A TU RITMO</span>
+              <h2 id="contenidos-title">Conocimiento que <span>sí puedes aplicar.</span></h2>
+              <p>Explora nuestras guías prácticas y aprende con ejemplos aplicables a tus proyectos.</p>
+            </div>
+            <span class="section-index" aria-hidden="true">02 / CONTENIDOS</span>
+          </div>
+          <div class="articles-grid">
+            {proximosArticulos.map((articulo) => (
+              <a class="article-card" href={articulo.enlace}>
+                <div class={`article-cover article-cover-${articulo.tono}`} aria-hidden="true"><span class="article-cover-grid"></span><span class="article-cover-icon">{articulo.icono}</span><span class="article-cover-decoration"></span></div>
+                <div class="article-copy"><div class="article-meta"><span>{articulo.categoria}</span><span class="coming-soon">{articulo.estado}</span></div><h3>{articulo.titulo}</h3><p>{articulo.descripcion}</p></div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="section tools-section" id="herramientas" aria-labelledby="herramientas-title">
+        <div class="container tools-layout">
+          <div class="tools-intro">
+            <span class="overline"><span class="overline-mark"></span> SOLUCIONES A UN CLIC</span>
+            <h2 id="herramientas-title">Herramientas útiles. <span>Sin complicaciones.</span></h2>
+            <p>Queremos que encuentres aquí pequeñas soluciones que ahorren tiempo: desde cálculos de redes hasta utilidades para trabajar con datos y enlaces.</p>
+            <div class="tools-note"><span class="note-dot"></span><span>Ya tienes seis herramientas gratuitas: calculadora IP, generador QR, conversor de bases, JSON, contraseñas y contador de palabras.</span></div>
+          </div>
+          <div class="tools-grid">
+            {proximasHerramientas.map((herramienta) => (
+              <a class="tool-card" href={herramienta.destino}>
+                <span class={`tool-icon tool-icon-${herramienta.clase}`} aria-hidden="true">{herramienta.icono}</span>
+                <h3>{herramienta.nombre}</h3>
+                <p>{herramienta.descripcion}</p>
+                <span class="tool-status">{herramienta.disponible ? 'Usar herramienta →' : 'Próximamente'}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="about-section" id="acerca" aria-labelledby="acerca-title">
+        <div class="container about-layout">
+          <div class="about-mark" aria-hidden="true"><img src="/images/logo-simbolo.webp" alt="" width="572" height="612" loading="lazy" /></div>
+          <div class="about-copy"><span class="overline"><span class="overline-mark"></span> ESTO ES SAMITECNOLOGIA</span><h2 id="acerca-title">La curiosidad nos mueve. <span>La tecnología nos conecta.</span></h2><p>Creemos que aprender tecnología debe ser una experiencia clara, práctica e inspiradora. Por eso estamos construyendo un espacio donde las ideas encuentren herramientas para hacerse realidad.</p><a class="text-link" href="#categorias">Empieza a explorar <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-main">
+        <div class="footer-identity"><a href="#inicio" aria-label="Volver al inicio"><img src="/images/logo-horizontal.webp" alt="SamiTecnologia" width="946" height="353" loading="lazy" /></a><p>Explora · Aprende · Innova</p></div>
+        <nav aria-label="Enlaces del pie de página"><a href="#inicio">Inicio</a><a href="#categorias">Explorar</a><a href="#contenidos">Contenidos</a><a href="/herramientas/">Herramientas</a><a href="/nosotros/">Nosotros</a><a href="/contacto/">Contacto</a></nav>
+      </div>
+      <div class="container footer-bottom"><span>© {new Date().getFullYear()} SamiTecnologia. Todos los derechos reservados.</span><span><a href="/privacidad/">Privacidad</a><a href="/cookies/">Cookies</a><a href="/terminos/">Términos</a></span></div>
+    </footer>
+
+    <dialog id="search-dialog" class="search-dialog" aria-label="Buscar en SamiTecnologia">
+      <div class="search-panel">
+        <div class="search-heading"><div><span class="overline">EXPLORA EL PORTAL</span><h2>¿Qué te gustaría encontrar?</h2></div><button type="button" class="close-search" data-close-search aria-label="Cerrar buscador">✕</button></div>
+        <label class="search-field" for="search-input"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.7"/><path d="m16 16 4.5 4.5"/></svg><input id="search-input" type="search" autocomplete="off" placeholder="Buscar redes, programación, calculadora IP..." /></label>
+        <p class="search-helper">Encuentra secciones y herramientas del portal.</p>
+        <div class="search-results" id="search-results" aria-live="polite"></div>
+      </div>
+    </dialog>
+
+    <script>
+      import { indiceBusqueda } from '../data/search';
+      const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+      const mobileNavigation = document.querySelector<HTMLElement>('#mobile-navigation');
+      const searchDialog = document.querySelector<HTMLDialogElement>('#search-dialog');
+      const searchInput = document.querySelector<HTMLInputElement>('#search-input');
+      const searchResults = document.querySelector<HTMLElement>('#search-results');
+
+      const closeMenu = () => {
+        if (!menuButton || !mobileNavigation) return;
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Abrir menú');
+        mobileNavigation.hidden = true;
+      };
+
+      menuButton?.addEventListener('click', () => {
+        if (!mobileNavigation) return;
+        const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', String(!isOpen));
+        menuButton.setAttribute('aria-label', isOpen ? 'Abrir menú' : 'Cerrar menú');
+        mobileNavigation.hidden = isOpen;
+      });
+      mobileNavigation?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+      window.matchMedia('(min-width: 921px)').addEventListener('change', (event) => {
+        if (event.matches) closeMenu();
+      });
+
+      const searchData = indiceBusqueda;
+
+      const renderResults = (value: string) => {
+        if (!searchResults) return;
+        searchResults.replaceChildren();
+        const normalized = value.trim().toLocaleLowerCase('es');
+        const matches = searchData.filter((item) => `${item.name} ${item.description} ${item.tag}`.toLocaleLowerCase('es').includes(normalized));
+        if (matches.length === 0) {
+          const empty = document.createElement('p');
+          empty.className = 'search-empty';
+          empty.textContent = 'No encontramos coincidencias. Prueba con otra palabra.';
+          searchResults.append(empty);
+          return;
+        }
+        matches.forEach((item) => {
+          const link = document.createElement('a');
+          link.href = item.href;
+          link.className = 'search-result';
+          const body = document.createElement('span');
+          const title = document.createElement('strong');
+          title.textContent = item.name;
+          const description = document.createElement('small');
+          description.textContent = item.description;
+          const tag = document.createElement('span');
+          tag.className = 'search-result-tag';
+          tag.textContent = item.tag;
+          body.append(title, description);
+          link.append(body, tag);
+          link.addEventListener('click', () => searchDialog?.close());
+          searchResults.append(link);
+        });
+      };
+
+      const openSearch = () => {
+        if (!searchDialog || searchDialog.open) return;
+        closeMenu();
+        searchInput && (searchInput.value = '');
+        renderResults('');
+        searchDialog.showModal();
+        searchInput?.focus();
+      };
+      document.querySelectorAll('[data-open-search]').forEach((button) => button.addEventListener('click', openSearch));
+      document.querySelector('[data-close-search]')?.addEventListener('click', () => searchDialog?.close());
+      searchInput?.addEventListener('input', () => renderResults(searchInput.value));
+      searchDialog?.addEventListener('click', (event) => {
+        if (event.target === searchDialog) searchDialog.close();
+      });
+      document.addEventListener('keydown', (event) => {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+          event.preventDefault();
+          if (searchDialog?.open) searchDialog.close();
+          else openSearch();
+        }
+        if (event.key === 'Escape') closeMenu();
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  :global(*) { box-sizing: border-box; }
+  :global(html) { scroll-behavior: smooth; scroll-padding-top: 95px; }
+  :global(body) { margin: 0; background: #f5f8fc; color: #152a42; font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  :global(a) { text-decoration: none; color: inherit; }
+  :global(button), :global(input) { font: inherit; }
+  :global(button) { cursor: pointer; }
+  :global(img), :global(svg) { display: block; }
+  :global(:focus-visible) { outline: 3px solid #49cfe9; outline-offset: 4px; }
+  :global([hidden]) { display: none !important; }
+  .container { width: min(1232px, calc(100% - 72px)); margin-inline: auto; }
+  .skip-link { position: absolute; z-index: 1000; left: 12px; top: -80px; padding: 12px 18px; background: white; color: #09172b; border-radius: 8px; }
+  .skip-link:focus { top: 12px; }
+
+  /* Navegación */
+  .site-header { position: relative; z-index: 20; background: #09172b; border-bottom: 1px solid rgba(153, 207, 241, .13); }
+  .nav-shell { display: flex; align-items: center; justify-content: space-between; min-height: 96px; gap: 30px; }
+  .brand { display: flex; align-items: center; width: 258px; flex-shrink: 0; }
+  .brand img { width: 100%; height: 84px; object-fit: contain; object-position: left center; }
+  .desktop-nav { display: flex; align-items: center; justify-content: center; gap: clamp(20px, 2.2vw, 35px); margin-left: auto; }
+  .desktop-nav a { font-size: 13px; color: #b5c6d9; font-weight: 600; transition: color .2s ease; white-space: nowrap; }
+  .desktop-nav a:hover, .desktop-nav .nav-active { color: #fff; }
+  .desktop-nav .nav-active::after { content: ''; display: block; height: 2px; width: 18px; margin-top: 8px; background: #57daec; border-radius: 5px; }
+  .header-actions { display: flex; align-items: center; gap: 10px; }
+  .search-button { display: flex; align-items: center; gap: 10px; border: 1px solid #27445e; border-radius: 12px; background: #112841; color: #d9eaf7; padding: 10px 11px; font-size: 12px; font-weight: 600; transition: background .2s; }
+  .search-button:hover { background: #1b3d59; }
+  .search-button kbd { color: #8299af; border: 1px solid #33506a; border-radius: 5px; padding: 3px 4px; font-size: 10px; font-family: inherit; }
+  .menu-button { display: none; align-items: center; justify-content: center; width: 43px; height: 43px; color: white; background: #132d46; border: 1px solid #2f4c68; border-radius: 10px; }
+  .mobile-nav { background: #0d2137; border-top: 1px solid #213c56; padding: 9px 24px 20px; }
+  .mobile-nav a { display: block; padding: 13px 6px; color: #e1effb; font-weight: 600; font-size: 14px; border-bottom: 1px solid #203950; }
+
+  /* Hero */
+  .hero { position: relative; isolation: isolate; overflow: hidden; background: linear-gradient(125deg, #09172b 0%, #0b2038 55%, #0d3352 100%); color: white; }
+  .hero-grid { position: absolute; inset: 0; opacity: .18; z-index: -1; background-image: linear-gradient(rgba(120, 189, 238, .12) 1px, transparent 1px),linear-gradient(90deg, rgba(120, 189, 238, .12) 1px, transparent 1px); background-size: 64px 64px; mask-image: linear-gradient(90deg, transparent 0%, black 65%); }
+  .hero-orb { position: absolute; z-index: -1; border-radius: 50%; filter: blur(72px); pointer-events: none; }
+  .hero-orb-one { width: 490px; height: 490px; background: rgba(16, 132, 211, .14); right: 5%; top: 4%; }
+  .hero-orb-two { width: 240px; height: 240px; background: rgba(25, 224, 230, .09); left: 28%; bottom: -170px; }
+  .hero-layout { min-height: 635px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(340px, .8fr); gap: 45px; align-items: center; padding-top: 80px; padding-bottom: 95px; }
+  .hero-copy { position: relative; z-index: 2; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 11px; color: #6de8f6; font-size: 11px; font-weight: 800; letter-spacing: .17em; margin-bottom: 26px; }
+  .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: #53ebee; box-shadow: 0 0 0 6px rgba(83, 235, 238, .1); }
+  h1,h2,h3,p { margin-top: 0; }
+  h1,h2,h3 { font-family: 'Space Grotesk', 'Inter', sans-serif; }
+  .hero h1 { font-size: clamp(48px, 5.1vw, 77px); font-weight: 700; letter-spacing: -.052em; line-height: 1.08; max-width: 770px; margin-bottom: 27px; }
+  .hero h1 > span { display: block; color: #69e4f0; }
+  .hero h1 .period { color: #fff; }
+  .hero-description { max-width: 570px; color: #bbcee0; font-size: 16px; line-height: 1.85; margin-bottom: 32px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .button { min-height: 51px; padding: 13px 19px; display: inline-flex; align-items: center; justify-content: center; gap: 18px; border-radius: 11px; font-size: 13px; font-weight: 800; transition: transform .2s, background .2s, border-color .2s; }
+  .button:hover { transform: translateY(-2px); }
+  .button-primary { color: #061d2e; background: linear-gradient(110deg, #75e9f1, #39b7ee); box-shadow: 0 9px 24px rgba(39, 179, 235, .22); }
+  .button-primary:hover { background: linear-gradient(110deg, #98f5fa, #65d5fa); }
+  .button-ghost { border: 1px solid #476581; color: #edf8ff; background: rgba(255,255,255,.03); }
+  .button-ghost:hover { border-color: #77cae8; background: rgba(255,255,255,.07); }
+  .hero-highlights { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 38px; }
+  .hero-highlights span { display: flex; align-items: center; gap: 7px; color: #9bb6ce; font-size: 12px; }
+  .hero-highlights svg { width: 16px; height: 16px; color: #70e5ed; }
+  .hero-art { width: 100%; min-height: 450px; position: relative; display: grid; place-items: center; }
+  .hero-art-halo { position: absolute; width: 390px; height: 390px; max-width: 100%; border-radius: 50%; background: radial-gradient(circle, rgba(24,158,213,.22), rgba(6,29,52,0) 68%); filter: blur(6px); }
+  .hero-art-ring { position: absolute; border: 1px solid rgba(95, 209, 238, .13); border-radius: 50%; }
+  .ring-one { width: 420px; height: 420px; max-width: 100%; }
+  .ring-two { width: 345px; height: 345px; max-width: 90%; border-style: dashed; opacity: .5; }
+  .hero-emblem { position: relative; z-index: 2; width: min(385px, 95%); height: auto; object-fit: contain; filter: drop-shadow(0 24px 40px rgba(0, 180, 255, .17)); }
+  .spark { position: absolute; z-index: 1; width: 5px; height: 5px; border-radius: 50%; background: #80ebf1; box-shadow: 0 0 15px #49dffc; }
+  .spark-a { top: 21%; left: 11%; } .spark-b { top: 32%; right: 6%; } .spark-c { bottom: 18%; right: 23%; }
+  .hero-bottom-line { height: 2px; width: 100%; background: linear-gradient(90deg, transparent, rgba(78,225,239,.55) 52%, transparent); }
+
+  /* Tira editorial */
+  .intro-strip { background: #fff; border-bottom: 1px solid #e5edf5; }
+  .intro-strip-content { display: flex; align-items: center; justify-content: space-between; gap: 25px; min-height: 83px; }
+  .strip-label { color: #7a8ba0; font-size: 10px; font-weight: 800; letter-spacing: .16em; white-space: nowrap; }
+  .intro-strip-content > span:nth-child(2) { color: #273e56; font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: .015em; }
+  .intro-strip-content b { color: #1ab3d9; font-size: 12px; margin: 0 8px; }
+  .intro-strip-content a { color: #177da9; font-weight: 800; font-size: 12px; white-space: nowrap; }
+
+  /* Secciones */
+  .section { padding: 105px 0; }
+  .section-top { display: flex; justify-content: space-between; gap: 30px; align-items: flex-start; margin-bottom: 40px; }
+  .section-heading { max-width: 740px; }
+  .overline { display: inline-flex; align-items: center; gap: 10px; color: #1689b8; font-size: 10px; font-weight: 800; letter-spacing: .17em; }
+  .overline-mark { width: 20px; height: 2px; border-radius: 3px; background: #22bfdb; }
+  .section-heading h2,.tools-intro h2,.about-copy h2 { margin: 17px 0 14px; color: #152b45; font-size: clamp(32px, 3.4vw, 49px); font-weight: 700; letter-spacing: -.05em; line-height: 1.16; }
+  .section-heading h2 span,.tools-intro h2 span { color: #178bb5; }
+  .section-heading p { max-width: 635px; color: #65788c; font-size: 14px; line-height: 1.85; margin-bottom: 0; }
+  .section-index { color: #91a2b3; font-weight: 800; letter-spacing: .13em; font-size: 10px; white-space: nowrap; padding-top: 8px; }
+
+  /* Categorías */
+  .categories-section { background: #f5f8fc; }
+  .category-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 18px; }
+  .category-card { min-height: 321px; position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 25px 23px; background: #fff; border: 1px solid #e0e9f3; border-radius: 18px; box-shadow: 0 14px 40px rgba(17,47,76,.045); transition: transform .23s, box-shadow .23s, border-color .23s; }
+  .category-card:hover { transform: translateY(-6px); box-shadow: 0 22px 50px rgba(12,57,90,.1); border-color: #c1dbea; }
+  .category-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .category-icon { display: grid; place-items: center; min-width: 54px; height: 54px; padding: 0 8px; border-radius: 13px; font: 700 19px/1 'Space Grotesk', sans-serif; letter-spacing: -.07em; background: #e7f5fc; color: #1788b7; }
+  .category-number { font: 700 11px/1 'Space Grotesk', sans-serif; color: #b7c4d2; }
+  .category-redes .category-icon { background: #e8eefa; color: #5375d8; }
+  .category-herramientas .category-icon { background: #e5f9f6; color: #178e85; }
+  .category-tutoriales .category-icon { background: #f2eefd; color: #8b67c5; }
+  .category-body { margin-top: auto; padding-top: 35px; }
+  .category-kicker { font-size: 10px; color: #8195a9; font-weight: 700; }
+  .category-card h3 { font-size: 22px; margin: 10px 0; color: #17304a; letter-spacing: -.04em; }
+  .category-card p { color: #6e8092; font-size: 12px; line-height: 1.75; margin: 0; }
+  .category-arrow { position: absolute; top: 23px; right: 50px; color: #95aabd; font-size: 18px; }
+
+  /* Contenidos */
+  .editorial-section { background: white; border-top: 1px solid #e8eef5; }
+  .articles-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 22px; }
+  .article-card { display: block; color: inherit; overflow: hidden; border: 1px solid #e3ebf3; background: #fff; border-radius: 18px; box-shadow: 0 10px 26px rgba(17,47,76,.035); }
+  .article-cover { position: relative; min-height: 178px; overflow: hidden; display: grid; place-items: center; isolation: isolate; }
+  .article-cover-blue { background: linear-gradient(130deg,#0d2441,#176c9c); }
+  .article-cover-violet { background: linear-gradient(130deg,#131e40,#594892); }
+  .article-cover-mint { background: linear-gradient(130deg,#0b333f,#178c93); }
+  .article-cover-grid { position: absolute; inset: 0; opacity: .3; z-index: -1; background-image: linear-gradient(rgba(255,255,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.13) 1px,transparent 1px); background-size: 32px 32px; }
+  .article-cover-icon { color: #dffbff; font: 700 55px/1 'Space Grotesk', sans-serif; letter-spacing: -.07em; text-shadow: 0 4px 28px rgba(66,218,252,.3); }
+  .article-cover-decoration { position: absolute; border: 1px solid rgba(255,255,255,.12); width: 240px; height: 240px; border-radius: 50%; left: 50%; top: 50%; transform: translate(-50%,-50%); }
+  .article-copy { padding: 26px 25px 30px; }
+  .article-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; justify-content: space-between; color: #147fae; font-weight: 800; font-size: 10px; letter-spacing: .06em; }
+  .coming-soon { color: #8b9aab; background: #f1f5f9; border-radius: 20px; padding: 6px 9px; font-weight: 600; letter-spacing: 0; }
+  .article-copy h3 { color: #1b344e; font-size: 21px; line-height: 1.3; letter-spacing: -.035em; margin: 19px 0 12px; }
+  .article-copy p { color: #6a7d90; font-size: 12px; line-height: 1.85; margin: 0; }
+
+  /* Herramientas */
+  .tools-section { background: #edf5fb; border-top: 1px solid #e0ecf5; }
+  .tools-layout { display: grid; grid-template-columns: minmax(0,.83fr) minmax(0,1.17fr); gap: 75px; align-items: center; }
+  .tools-intro h2 { max-width: 495px; }
+  .tools-intro h2 span { display: block; }
+  .tools-intro > p { color: #697e91; max-width: 475px; line-height: 1.85; font-size: 14px; }
+  .tools-note { display: flex; gap: 10px; align-items: flex-start; margin-top: 30px; border-top: 1px solid #d8e6f1; padding-top: 23px; color: #5f7890; font-size: 11px; line-height: 1.7; }
+  .note-dot { margin-top: 6px; height: 7px; width: 7px; flex-shrink: 0; background: #2bc4dc; border-radius: 50%; }
+  .tools-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px; }
+  .tool-card { color: inherit; min-height: 218px; background: white; border: 1px solid #dce9f3; border-radius: 17px; padding: 22px; display: flex; flex-direction: column; box-shadow: 0 12px 25px rgba(23,58,84,.035); }
+  .tool-icon { display: grid; place-items: center; min-width: 48px; width: fit-content; height: 48px; border-radius: 12px; padding: 0 9px; font: 700 17px/1 'Space Grotesk', sans-serif; color: #1e8db8; background: #e4f4ff; }
+  .tool-icon-cyan { color: #078f9e; background: #e4f8fa; }
+  .tool-icon-violet { color: #785db1; background: #f0edfb; }
+  .tool-icon-mint { color: #188d7c; background: #e5f8f1; }
+  .tool-card h3 { margin: 18px 0 6px; color: #19334c; font-size: 16px; letter-spacing: -.03em; }
+  .tool-card p { color: #708497; font-size: 12px; line-height: 1.65; margin-bottom: 12px; }
+  .tool-status { display: block; margin-top: auto; color: #137ea5; font-size: 10px; font-weight: 800; }
+
+  /* Nosotros */
+  .about-section { overflow: hidden; background: linear-gradient(120deg,#09172b,#0e2d4b); color: #fff; }
+  .about-layout { display: grid; grid-template-columns: 340px minmax(0,1fr); gap: 65px; align-items: center; min-height: 415px; padding-block: 65px; }
+  .about-mark { display: grid; place-items: center; width: 300px; height: 300px; max-width: 100%; border: 1px solid rgba(87,197,225,.12); border-radius: 50%; background: radial-gradient(circle,rgba(35,143,201,.15),transparent 68%); }
+  .about-mark img { width: 235px; max-width: 82%; height: auto; }
+  .about-copy .overline { color: #62e1ed; }
+  .about-copy h2 { color: #fff; max-width: 790px; margin-bottom: 22px; }
+  .about-copy h2 span { color: #6de4ef; }
+  .about-copy p { color: #b9cfe0; line-height: 1.85; font-size: 14px; max-width: 690px; margin-bottom: 20px; }
+  .text-link { color: #76e6f2; font-size: 13px; font-weight: 800; display: inline-flex; gap: 14px; align-items: center; }
+
+  /* Footer */
+  .footer { background: #071322; color: #92a8bd; }
+  .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding-top: 32px; padding-bottom: 27px; border-bottom: 1px solid #24364a; }
+  .footer-identity img { display: block; width: 208px; height: 74px; object-fit: contain; object-position: left center; }
+  .footer-identity p { font-size: 11px; margin: 0 0 0 2px; }
+  .footer-main nav { display: flex; flex-wrap: wrap; gap: 25px; }
+  .footer-main nav a { font-size: 12px; font-weight: 600; color: #c8d6e5; }
+  .footer-main nav a:hover { color: #72deef; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 15px; min-height: 68px; font-size: 11px; }
+
+  /* Buscador */
+  .search-dialog { width: min(650px, calc(100% - 30px)); max-height: min(85vh,850px); border: 1px solid #d7e5ef; background: white; border-radius: 18px; padding: 0; box-shadow: 0 35px 110px rgba(2,20,41,.3); color: #172b45; }
+  .search-dialog::backdrop { background: rgba(3,14,29,.75); backdrop-filter: blur(5px); }
+  .search-panel { padding: 28px; }
+  .search-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; }
+  .search-heading h2 { margin: 10px 0 22px; font-size: clamp(22px,3vw,30px); letter-spacing: -.045em; }
+  .close-search { border: 1px solid #e0e7ef; width: 35px; height: 35px; flex-shrink: 0; border-radius: 9px; background: #f5f8fb; color: #536e83; }
+  .search-field { display: flex; gap: 13px; align-items: center; padding: 14px 15px; border: 1px solid #aecedc; border-radius: 11px; color: #1783a7; }
+  .search-field:focus-within { box-shadow: 0 0 0 3px #bce9f1; }
+  .search-field input { border: none; outline: none; width: 100%; color: #122b42; font-size: 14px; min-width: 0; }
+  .search-field input::placeholder { color: #9aabba; }
+  .search-helper { color: #8093a5; font-size: 11px; margin: 11px 2px 19px; }
+  .search-results { max-height: 44vh; overflow-y: auto; display: grid; gap: 7px; }
+  .search-result { display: flex; justify-content: space-between; align-items: center; gap: 10px; border: 1px solid #e7edf3; background: #f8fafc; border-radius: 10px; padding: 13px; }
+  .search-result:hover { border-color: #9ad4e5; background: #effaff; }
+  .search-result > span:first-child { display: grid; gap: 4px; }
+  .search-result strong { font-size: 13px; }
+  .search-result small { font-size: 11px; color: #6d8194; }
+  .search-result-tag { color: #178cb0; font-size: 10px; font-weight: 800; white-space: nowrap; }
+  .search-empty { color: #677f93; font-size: 13px; }
+
+  .footer-bottom a { color: #a7dced; text-decoration: none; margin-left: 15px; }
+  .footer-bottom a:hover { color: #67e5f5; text-decoration: underline; }
+  @media (max-width: 1100px) {
+    .brand { width: 215px; }
+    .desktop-nav { gap: 19px; }
+    .search-button kbd { display: none; }
+    .hero-layout { grid-template-columns: minmax(0,1fr) minmax(280px,.7fr); gap: 28px; }
+    .hero h1 { font-size: clamp(45px,5vw,63px); }
+    .hero-emblem { width: min(330px,95%); }
+    .category-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .category-card { min-height: 265px; }
+    .tools-layout { gap: 35px; }
+  }
+  @media (max-width: 920px) {
+    .container { width: min(100% - 48px,1232px); }
+    .nav-shell { min-height: 82px; }
+    .brand { width: 230px; }
+    .brand img { height: 72px; }
+    .desktop-nav { display: none; }
+    .menu-button { display: inline-flex; }
+    .search-button span,.search-button kbd { display: none; }
+    .search-button { width: 43px; height: 43px; display: grid; place-items: center; }
+    .hero-layout { min-height: unset; padding-top: 78px; padding-bottom: 75px; }
+    .hero h1 { font-size: clamp(40px,5.5vw,61px); }
+    .hero-art { min-height: 300px; }
+    .hero-emblem { width: 280px; }
+    .ring-one { width: 290px; height: 290px; }
+    .ring-two { width: 240px; height: 240px; }
+    .intro-strip-content { flex-wrap: wrap; justify-content: center; padding-block: 20px; }
+    .articles-grid { gap: 14px; }
+    .article-copy { padding: 22px 18px; }
+    .about-layout { grid-template-columns: 230px 1fr; gap: 30px; }
+    .about-mark { width: 210px; height: 210px; }
+  }
+  @media (max-width: 720px) {
+    .container { width: calc(100% - 36px); }
+    .hero-layout { display: flex; flex-direction: column; align-items: flex-start; gap: 25px; padding-block: 66px 40px; }
+    .hero-copy { width: 100%; }
+    .hero h1 { font-size: clamp(40px,9vw,59px); }
+    .hero-description { font-size: 14px; }
+    .hero-highlights { gap: 15px; margin-top: 28px; }
+    .hero-art { width: 100%; min-height: 270px; }
+    .hero-emblem { width: min(270px,75vw); }
+    .section { padding: 75px 0; }
+    .section-index { display: none; }
+    .section-heading h2,.tools-intro h2,.about-copy h2 { font-size: clamp(31px,7vw,42px); }
+    .articles-grid { grid-template-columns: 1fr; gap: 18px; }
+    .article-cover { min-height: 160px; }
+    .tools-layout { display: flex; flex-direction: column; align-items: stretch; gap: 27px; }
+    .tools-intro h2 span { display: inline; }
+    .about-layout { display: flex; flex-direction: column; align-items: flex-start; padding-block: 70px; gap: 5px; }
+    .about-mark { width: 150px; height: 150px; border: none; }
+    .about-mark img { width: 130px; }
+    .footer-main,.footer-bottom { flex-direction: column; align-items: flex-start; }
+    .footer-main nav { gap: 18px; }
+    .footer-bottom { padding: 25px 0; }
+  }
+  @media (max-width: 460px) {
+    .brand { width: min(205px,calc(100% - 100px)); }
+    .brand img { height: 67px; }
+    .nav-shell { gap: 8px; }
+    .hero h1 { font-size: 40px; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .button { width: 100%; }
+    .eyebrow { font-size: 10px; letter-spacing: .1em; }
+    .intro-strip-content > span:nth-child(2) { text-align: center; font-size: 13px; }
+    .intro-strip-content b { margin: 0 3px; }
+    .category-grid { grid-template-columns: 1fr; }
+    .category-card { min-height: 254px; }
+    .tools-grid { gap: 10px; }
+    .tool-card { padding: 14px; min-height: 220px; }
+    .tool-card h3 { font-size: 14px; }
+    .tool-icon { height: 42px; min-width: 42px; }
+    .search-panel { padding: 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(html) { scroll-behavior: auto; }
+    *,*::before,*::after { transition: none !important; animation: none !important; }
+  }
+</style>

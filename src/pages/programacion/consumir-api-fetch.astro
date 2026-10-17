@@ -1,0 +1,36 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+const ejemplo = `async function consultarPublicacion() {
+  try {
+    const respuesta = await fetch(
+      'https://jsonplaceholder.typicode.com/posts/1'
+    );
+    if (!respuesta.ok) {
+      throw new Error('Error HTTP: ' + respuesta.status);
+    }
+    const datos = await respuesta.json();
+    console.log(datos.title);
+  } catch (error) {
+    console.error('No se pudo cargar el recurso', error);
+  }
+}
+consultarPublicacion();`;
+---
+<PortalLayout title="Cómo consultar una API con fetch y manejar errores" description="Aprende a obtener datos JSON con fetch, comprobar respuestas HTTP y mostrar errores de manera segura.">
+<section class="p-hero"><div class="p-container"><div class="p-crumb"><a href="/">Inicio</a><span>/</span><a href="/programacion/">Programación</a><span>/</span><span>consumir api fetch</span></div><p class="p-label">PROGRAMACIÓN · JAVASCRIPT</p><h1>Cómo consultar una API con fetch y manejar errores</h1><p>Aprende a obtener datos JSON con fetch, comprobar respuestas HTTP y mostrar errores de manera segura.</p></div></section>
+<section class="p-section"><article class="p-article">
+<p>Muchas aplicaciones consultan información mediante una API. En JavaScript, fetch permite hacer solicitudes de red y recibir una respuesta. Aprender a manejar fallos es tan importante como obtener los datos.</p>
+<h2>1. Qué hace fetch</h2>
+<p>fetch devuelve una promesa que se resuelve con un objeto Response cuando llega la respuesta HTTP. Un código de error como 404 o 500 no hace que la promesa se rechace automáticamente; por eso debes comprobar response.ok.</p>
+<h2>2. Consulta un recurso público</h2>
+<p>El ejemplo utiliza una dirección de demostración. La disponibilidad de una API externa puede cambiar. Nunca coloques claves privadas en código que se ejecuta en el navegador.</p>
+<pre><code>{ejemplo}</code></pre>
+<h2>3. Maneja fallos y estados</h2>
+<p>Muestra un mensaje de carga mientras llega el resultado. Si la respuesta no es correcta, informa el problema sin exponer datos internos del servidor. Utiliza try/catch para controlar también errores de red o JSON inválido.</p>
+<h2>4. Usa la información con cuidado</h2>
+<p>No insertes directamente texto desconocido mediante innerHTML. Prefiere textContent cuando el contenido procede de otra fuente. Valida los campos que necesitas: que una respuesta sea JSON no garantiza su estructura.</p>
+<h2>5. Ejercicio</h2>
+<p>Cambia la URL del ejemplo por otra API pública que permita peticiones desde el navegador. Comprueba cómo responde si desconectas Internet o solicitas un recurso inexistente.</p>
+<aside>Consejo: practica con tus propios ejemplos y verifica los resultados antes de aplicar cambios en un sistema real.</aside>
+<div class="p-related"><a href="/programacion/primeros-pasos-javascript/">JavaScript desde cero →</a><a href="/herramientas/formateador-json/">Formateador JSON →</a></div></article></section>
+</PortalLayout>

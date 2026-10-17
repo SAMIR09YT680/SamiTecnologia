@@ -1,0 +1,8 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+import JsonFormatter from '../../components/tools/JsonFormatter';
+---
+<PortalLayout title="Formateador y validador JSON" description="Formatea, valida y minifica JSON gratis directamente en tu navegador con SamiTecnologia.">
+  <section class="p-hero"><div class="p-container"><div class="p-crumb"><a href="/">Inicio</a><span>/</span><a href="/herramientas/">Herramientas</a><span>/</span><span>JSON</span></div><p class="p-label">HERRAMIENTA PARA DESARROLLADORES</p><h1>Formateador <em>JSON</em></h1><p>Valida y organiza datos JSON de manera rápida, directamente desde tu navegador.</p></div></section>
+  <section class="p-section"><div class="p-container"><JsonFormatter client:load /><p class="tool-explainer">Esta utilidad utiliza <code>JSON.parse</code> y <code>JSON.stringify</code>. Recuerda que JSON requiere comillas dobles en claves y cadenas, y no admite comentarios ni comas finales.</p><p style="margin-top:30px"><a class="p-back" href="/herramientas/">← Volver a las herramientas</a></p></div></section>
+</PortalLayout>

@@ -1,0 +1,55 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+const { title, description, type = 'website', noindex = false } = Astro.props;
+
+// Hasta confirmar el dominio o la URL publica, no generamos enlaces canonicos de localhost.
+// En Cloudflare Pages se podra configurar PUBLIC_SITE_URL=https://tu-dominio-confirmado.com
+const rawSiteUrl = import.meta.env.PUBLIC_SITE_URL?.trim();
+let siteOrigin: string | undefined;
+if (rawSiteUrl) {
+  try {
+    const parsed = new URL(rawSiteUrl);
+    if (parsed.protocol === 'https:' && parsed.hostname !== 'localhost') {
+      siteOrigin = parsed.origin;
+    }
+  } catch {
+    // Un valor erroneo no debe romper la compilacion.
+  }
+}
+const canonical = siteOrigin ? new URL(Astro.url.pathname, siteOrigin).href : undefined;
+const socialImage = siteOrigin ? new URL('/images/logo-horizontal.webp', siteOrigin).href : undefined;
+const schema = canonical ? {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description,
+  url: canonical,
+  inLanguage: 'es',
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'SamiTecnologia',
+    url: `${siteOrigin}/`,
+  },
+} : undefined;
+---
+<meta name="description" content={description} />
+<meta name="robots" content={noindex || !siteOrigin ? 'noindex, follow' : 'index, follow'} />
+<meta property="og:site_name" content="SamiTecnologia" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:locale" content="es_ES" />
+<meta name="twitter:card" content={socialImage ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{canonical && <link rel="canonical" href={canonical} />}
+{canonical && <meta property="og:url" content={canonical} />}
+{socialImage && <meta property="og:image" content={socialImage} />}
+{socialImage && <meta name="twitter:image" content={socialImage} />}
+{schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+<title>{title}</title>

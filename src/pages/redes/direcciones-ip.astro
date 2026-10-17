@@ -1,0 +1,21 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+---
+<PortalLayout title="Qué es una dirección IP y cómo funciona" description="Aprende qué es una dirección IP, para qué sirve la máscara de subred y cómo distinguir direcciones públicas y privadas.">
+  <section class="p-hero"><div class="p-container"><div class="p-crumb"><a href="/">Inicio</a><span>/</span><a href="/redes/">Redes</a><span>/</span><span>Direcciones IP</span></div><p class="p-label">GUÍA DE REDES · NIVEL INICIAL</p><h1>Qué es una <em>dirección IP</em> y cómo funciona</h1><p>Comprende las direcciones IPv4, la máscara y los conceptos esenciales de una red con ejemplos fáciles de seguir.</p></div></section>
+  <section class="p-section"><article class="p-article">
+    <p>Una <strong>dirección IP</strong> es un identificador que permite ubicar un dispositivo o una interfaz dentro de una red que utiliza el protocolo de Internet. Cuando tu celular se conecta al Wi-Fi de casa, normalmente recibe una dirección IP privada.</p>
+    <h2>1. Cómo se escribe una IPv4</h2>
+    <p>Una dirección IPv4 tiene 32 bits distribuidos en cuatro números de 0 a 255, separados por puntos. Por ejemplo: <code>192.168.1.10</code>.</p>
+    <h2>2. Para qué sirve la máscara de subred</h2>
+    <p>La máscara indica qué parte de la dirección identifica a la red y cuál corresponde a las direcciones dentro de ese bloque. Una máscara <code>255.255.255.0</code> equivale al prefijo <code>/24</code>.</p>
+    <aside><strong>Ejemplo:</strong> si un equipo utiliza <code>192.168.1.10/24</code>, la dirección de red es <code>192.168.1.0</code> y el broadcast es <code>192.168.1.255</code>. En el direccionamiento IPv4 convencional, el rango de hosts va de <code>192.168.1.1</code> a <code>192.168.1.254</code>.</aside>
+    <h2>3. Direcciones IP privadas y públicas</h2>
+    <p>Los rangos privados definidos en RFC 1918 son <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code> y <code>192.168.0.0/16</code>. Se emplean normalmente dentro de redes locales. Una IP pública puede ser enrutada en Internet, aunque existen otras direcciones especiales o reservadas que tampoco son públicas.</p>
+    <h2>4. Qué hace un router</h2>
+    <p>Un router conecta redes distintas y decide por dónde reenviar los paquetes. En una red doméstica, suele actuar como puerta de enlace hacia Internet. Muchos routers realizan también NAT para que varios dispositivos de la red local compartan una conexión pública.</p>
+    <h2>5. Comprueba una subred</h2>
+    <p>Abre nuestra calculadora, escribe <code>192.168.1.10</code> y selecciona el prefijo <code>24</code>. Podrás comprobar los datos del ejemplo.</p>
+    <div class="p-related"><a href="/herramientas/calculadora-ip/">Abrir calculadora IPv4/CIDR →</a><a href="/redes/">Más contenido de redes</a></div>
+  </article></section>
+</PortalLayout>
